@@ -33,6 +33,13 @@ public class CamereControl : MonoBehaviour {
     public bool smooth02 = false;
     public bool smooth03 = false;
     public bool smoothBoss = false;
+    public float CameraPlaceX1;
+    public float CameraPlaceX2;
+    public float CameraPlaceX3;
+    public float CameraPlaceX4;
+    public float CameraPlaceX5;
+    public float CameraPlaceX6;
+    public float CameraPlaceX7;
     public float moveSpd;
     public float showSpd;
     public float sehaiSpd;
@@ -260,23 +267,23 @@ public class CamereControl : MonoBehaviour {
 
     public void ChgCameraPlc()
     {
-        if (player.transform.position.x < 82f)
+        if (player.transform.position.x <CameraPlaceX1)
         {
             smooth01 = true;
             ScaleChg = true;
             
         }
-        else if (player.position.x > 83 && player.position.x < 160)
+        else if (player.position.x > CameraPlaceX2 && player.position.x < CameraPlaceX3)
         {
             smooth02 = true;
             ScaleChg = true;
         }
-        else if (player.position.x > 161 && player.position.x < 255)
+        else if (player.position.x > CameraPlaceX4 && player.position.x < CameraPlaceX5)
         {
             smooth03 = true;
             ScaleChg = true;
         }
-        else if (player.position.x > 256 && player.position.x < 315)
+        else if (player.position.x > CameraPlaceX6 && player.position.x < CameraPlaceX7)
         {
             smoothBoss = true;
             ScaleChg = true;

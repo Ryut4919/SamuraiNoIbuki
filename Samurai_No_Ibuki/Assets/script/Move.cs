@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
@@ -69,7 +70,12 @@ public class Move : MonoBehaviour
 
         Debug.DrawRay(position, direction, Color.green);
         RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
-        if (hit.collider!=null)
+        if (hit.collider == null)
+        {
+            ground = true;
+            animator.SetBool("DropPose", true);
+        }
+        else if (hit.collider!=null)
         {
             ground = true;
             animator.SetBool("DropPose", false);
@@ -518,12 +524,12 @@ public class Move : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag=="Block_event")//进入战斗1
+        if (other.gameObject.tag == "Block_event")//进入战斗1
         {
             Debug.Log("EVENT START");
             GameObject.Find("Event1").GetComponent<Block_Event>().ShowBlock01();
             GameObject.Find("Event1").GetComponent<BoxCollider2D>().enabled = false;
-            
+
         }
         else if (other.gameObject.tag == "Block_event2")//进入战斗2
         {
@@ -542,6 +548,11 @@ public class Move : MonoBehaviour
             Debug.Log("Block_Boss");
             GameObject.Find("BossEvent").GetComponent<Block_Event>().ShowBossBlock();
             GameObject.Find("BossEvent").GetComponent<BoxCollider2D>().enabled = false;
+        }
+        else if (other.gameObject.tag=="DownBattle")
+        {
+            Debug.Log("DownBattle");
+            SceneManager.LoadScene("DownBattle");
         }
 
     }
